@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: goldStore
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+    show-sql: true
+  flyway:
+    url: ${DATABASE_URL}
+    user: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+
+server:
+  port: ${BACKEND_PORT}
