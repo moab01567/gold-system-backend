@@ -1,0 +1,6 @@
+.env
+target
+dev.docker-compose.yaml
+mysql-data
+.idea
+.gitignore

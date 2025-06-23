@@ -1,0 +1,24 @@
+services:
+  backend:
+    image: maven:3.9-eclipse-temurin-17
+    working_dir: /app
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/app
+      - /app/target
+    command: mvn spring-boot:run
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.4.0
+    env_file:
+      - ./.env
+    environment:
+      MYSQL_DATABASE: gold_store
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./mysql-data:/var/lib/mysql
