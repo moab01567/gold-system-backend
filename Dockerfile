@@ -1,6 +1,6 @@
 FROM maven AS build
 WORKDIR /app
-COPY . .
+COPY backend .
 RUN mvn clean install
 
 # Bruk en smalere base for runtime
