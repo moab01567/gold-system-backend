@@ -4,6 +4,7 @@ package com.rizamo.goldStore.features.auth.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -13,7 +14,11 @@ import java.util.Date;
 @Component
 public class  JwtHelper {
 
-    private final String SECRET = System.getenv("JWT_SECRET");
+    private final String SECRET;
+
+    public JwtHelper(@Value("${security.jwtSecret}")String secret) {
+        SECRET = secret;
+    }
 
     private SecretKey getSignKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET);

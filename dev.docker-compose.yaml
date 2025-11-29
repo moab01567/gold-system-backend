@@ -3,7 +3,7 @@ services:
     image: maven:3.9-eclipse-temurin-17
     working_dir: /app
     env_file:
-      - ./.env
+      - .gold.env
     volumes:
       - ./:/app
       - /app/target
@@ -16,7 +16,7 @@ services:
   database:
     image: mysql:8.4.0
     env_file:
-      - ./.env
+      - .gold.env
     environment:
       MYSQL_DATABASE: gold_store
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
