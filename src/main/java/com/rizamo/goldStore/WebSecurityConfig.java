@@ -4,6 +4,7 @@ import com.rizamo.goldStore.features.auth.jwt.AuthEntryPointJwt;
 import com.rizamo.goldStore.features.auth.jwt.JwtFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,18 +25,23 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     private final JwtFilter jwtFilter;
     private final AuthEntryPointJwt authEntryPointJwt;
+    @Value("${security.allowOrigin}")
+    private String allowOrigin;
 
     @Autowired
-    public WebSecurityConfig(JwtFilter jwtFilter, AuthEntryPointJwt authEntryPointJwt) {
+    public WebSecurityConfig(JwtFilter jwtFilter,
+                             AuthEntryPointJwt authEntryPointJwt,
+                            @Value("${security.allowOrigin}") String allowOrigin) {
         this.jwtFilter = jwtFilter;
         this.authEntryPointJwt = authEntryPointJwt;
+        this.allowOrigin = allowOrigin;
     }
 
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(System.getenv("ALLOW_ORIGIN")));
+        config.setAllowedOrigins(List.of(allowOrigin));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

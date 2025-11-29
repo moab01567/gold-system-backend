@@ -1,4 +1,4 @@
-.env
+.gold.env
 target
 dev.docker-compose.yaml
 mysql-data

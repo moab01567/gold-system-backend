@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN mvn clean install
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
